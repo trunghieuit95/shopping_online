@@ -10,7 +10,17 @@
 | to using a Closure or controller method. Build something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['namespace'=>'Admin','prefix'=>'admin'],function(){
+	Route::get('/', [
+			 'as'	=> 'admin.home', 'uses'	=> 'AdminController@index'
+		]);
+	Route::resource('cate', 'CategoryController',[
+			'only' => ['index','create', 'store', 'edit', 'update', 'destroy']
+		]);
+	Route::resource('product', 'ProductController',[
+			'only' => ['index','create', 'store', 'edit', 'update', 'destroy']
+		]);
 });
+// Route::get('/', function () {
+//     return view('errors.503');
+// });
